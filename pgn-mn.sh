@@ -4,7 +4,7 @@ cd ~
 echo "****************************************************************************"
 echo "* Ubuntu 18.04 is the recommended operating system for this install.       *"
 echo "*                                                                          *"
-echo "* This script will install and configure your GENIX masternodes.           *"
+echo "* This script will install and configure your Pigeoncoin masternodes.           *"
 echo "****************************************************************************"
 echo && echo && echo
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -141,46 +141,3 @@ for i in $(seq 1 1 $MNCOUNT); do
 
     sh ~/bin/pigeond_$ALIAS.sh
 done
-
-echo "Do you want to install sentinel? (no if you did it before) [y/n]"
-read SENTINELSETUP
-
-if [[ $SENTINELSETUP =~ "y" ]]; then
-    echo "Starting sentinel setup.."
-
-    version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
-    parsedVersion=$(echo "${version//./}")
-    new=$(tr -dc '0-9' <<<$parsedVersion | cut -c1-4)
-
-    if [[ "$new" -lt "3000" && "$new" -gt "2700" ]]; then
-        echo "Valid version skipping py installation..."
-    else
-        echo "Invalid version installing py..."
-        sudo apt-get install -y python
-    fi
-
-    cd ~
-
-    sudo apt-get -y install virtualenv
-
-    git clone https://github.com/genix-project/sentinel.git
-
-    echo "setting up sentinel..."
-
-    echo "dash_conf=$CONF_DIR/genix.conf" >>sentinel.conf_TEMP
-    echo "network=mainnet" >>sentinel.conf_TEMP
-    echo "db_name=database/sentinel.db" >>sentinel.conf_TEMP
-    echo "db_driver=sqlite" >>sentinel.conf_TEMP
-
-    mv sentinel.conf_TEMP $HOME/sentinel/sentinel.conf
-
-    cd ~/sentinel
-
-    virtualenv ./venv
-    ./venv/bin/pip install -r requirements.txt
-    crontab -l | {
-        cat
-        echo "* * * * * cd /root/sentinel/ && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1"
-    } | crontab -
-    echo "all done"
-fi
