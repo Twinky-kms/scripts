@@ -22,6 +22,11 @@ if [[ $DOSETUP =~ "y" ]]; then
     cd
 
     if [[ -d dash-fork/ ]]; then
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    echo "!                                                 !"
+    echo "!    Detected previous build files, deleting..    !"
+    echo "!                                                 !"
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         rm -r dash-fork/
     fi 
 
