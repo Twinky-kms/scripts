@@ -18,6 +18,13 @@ echo "Do you want to install all needed dependencies (no if you did it before)? 
 read DOSETUP
 
 if [[ $DOSETUP =~ "y" ]]; then
+
+    cd
+
+    if [[ -d dash-fork/ ]]; then
+        rm -r dash-fork/
+    fi 
+
     sudo apt-get -y update
     sudo apt-get -y upgrade
     sudo apt-get -y install git
