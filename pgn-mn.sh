@@ -18,6 +18,18 @@ echo "Do you want to install all needed dependencies (no if you did it before)? 
 read DOSETUP
 
 if [[ $DOSETUP =~ "y" ]]; then
+
+    cd
+
+    if [[ -d dash-fork/ ]]; then
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    echo "!                                                 !"
+    echo "!    Detected previous build files, deleting..    !"
+    echo "!                                                 !"
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        rm -r dash-fork/
+    fi 
+
     sudo apt-get -y update
     sudo apt-get -y upgrade
     sudo apt-get -y install git
@@ -110,31 +122,31 @@ for i in $(seq 1 1 $MNCOUNT); do
     chmod 755 ~/bin/pigeon*.sh
 
     mkdir -p $CONF_DIR
-    echo "testnet=1"
-    echo ""
-    echo "[test]"
-    echo "rpcuser=user"$(shuf -i 100000-10000000 -n 1) >>pigeon.conf_TEMP
-    echo "rpcpassword=pass"$(shuf -i 100000-10000000 -n 1) >>pigeon.conf_TEMP
-    echo "rpcallowip=127.0.0.1" >>pigeon.conf_TEMP
-    echo "rpcport=$RPCPORT" >>pigeon.conf_TEMP
-    echo "listen=1" >>pigeon.conf_TEMP
-    echo "server=1" >>pigeon.conf_TEMP
-    echo "daemon=1" >>pigeon.conf_TEMP
-    echo "port=$PORT" >>pigeon.conf_TEMP
-    echo "externalip=$IP" >>pigeon.conf_TEMP
-    echo "bind=$IP" >>pigeon.conf_TEMP
-    echo "logtimestamps=1" >>pigeon.conf_TEMP
-    echo "maxconnections=64" >>pigeon.conf_TEMP
-    echo "" >>pigeon.conf_TEMP
+    echo "testnet=1" >> pigeon.conf_TEMP
+    echo "" >> pigeon.conf_TEMP
+    echo "[test]" >> pigeon.conf_TEMP
+    echo "rpcuser=user"$(shuf -i 100000-10000000 -n 1) >> pigeon.conf_TEMP
+    echo "rpcpassword=pass"$(shuf -i 100000-10000000 -n 1) >> pigeon.conf_TEMP
+    echo "rpcallowip=127.0.0.1" >> pigeon.conf_TEMP
+    echo "rpcport=$RPCPORT" >> pigeon.conf_TEMP
+    echo "listen=1" >> pigeon.conf_TEMP
+    echo "server=1" >> pigeon.conf_TEMP
+    echo "daemon=1" >> pigeon.conf_TEMP
+    echo "port=$PORT" >> pigeon.conf_TEMP
+    echo "externalip=$IP" >> pigeon.conf_TEMP
+    echo "bind=$IP" >> pigeon.conf_TEMP
+    echo "logtimestamps=1" >> pigeon.conf_TEMP
+    echo "maxconnections=64" >> pigeon.conf_TEMP
+    echo "" >> pigeon.conf_TEMP
 
-    echo "addnode=138.68.75.8:18765" >>pigeon.conf_TEMP
-    echo "addnode=159.89.177.213:18765" >>pigeon.conf_TEMP
-    echo "addnode=86.3.228.217:18765" >>pigeon.conf_TEMP
-    echo "addnode=213.136.83.223:18765" >>pigeon.conf_TEMP
-    echo "addnode=45.63.99.59:18765" >>pigeon.conf_TEMP
+    echo "addnode=138.68.75.8:18765" >> pigeon.conf_TEMP
+    echo "addnode=159.89.177.213:18765" >> pigeon.conf_TEMP
+    echo "addnode=86.3.228.217:18765" >> pigeon.conf_TEMP
+    echo "addnode=213.136.83.223:18765" >> pigeon.conf_TEMP
+    echo "addnode=45.63.99.59:18765" >> pigeon.conf_TEMP
 
     echo "" >>pigeon.conf_TEMP
-    echo "masternodeprivkey=$PRIVKEY" >>pigeon.conf_TEMP
+    echo "masternodeprivkey=$PRIVKEY" >> pigeon.conf_TEMP
     sudo ufw allow $PORT/tcp
 
     mv pigeon.conf_TEMP $CONF_DIR/pigeon.conf
