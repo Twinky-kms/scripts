@@ -58,6 +58,11 @@ if [[ $DOSETUP =~ "y" ]]; then
     cd genix-fork/
     git checkout v2.2.1
     bash build.sh
+    rm /usr/bin/genixd*
+    mv src/genixd /usr/bin
+    mv src/genix-cli /usr/bin
+    mv src/genix-tx /usr/bin
+    #rm -r /root/genix-fork/
 
     sudo apt-get install -y ufw
     sudo ufw allow ssh/tcp
