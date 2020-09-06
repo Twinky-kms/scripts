@@ -57,6 +57,7 @@ if [[ $DOSETUP =~ "y" ]]; then
     git clone https://github.com/farsider350/genix-fork.git
     cd genix-fork/
     git checkout v2.2.1
+    bash build.sh
 
     sudo apt-get install -y ufw
     sudo ufw allow ssh/tcp
