@@ -93,7 +93,7 @@ for i in $(seq 1 1 $MNCOUNT); do
     read ALIAS
 
     echo ""
-    echo "Enter port 18765 for node $ALIAS"
+    echo "Enter port 32538 for node $ALIAS"
     read PORT
 
     echo ""
@@ -124,7 +124,6 @@ for i in $(seq 1 1 $MNCOUNT); do
     mkdir -p $CONF_DIR
     echo "testnet=1" >> genix.conf_TEMP
     echo "" >> genix.conf_TEMP
-    echo "[test]" >> genix.conf_TEMP
     echo "rpcuser=user"$(shuf -i 100000-10000000 -n 1) >> genix.conf_TEMP
     echo "rpcpassword=pass"$(shuf -i 100000-10000000 -n 1) >> genix.conf_TEMP
     echo "rpcallowip=127.0.0.1" >> genix.conf_TEMP
@@ -137,13 +136,8 @@ for i in $(seq 1 1 $MNCOUNT); do
     echo "bind=$IP" >> genix.conf_TEMP
     echo "logtimestamps=1" >> genix.conf_TEMP
     echo "maxconnections=64" >> genix.conf_TEMP
-    echo "" >> genix.conf_TEMP
-
-    echo "addnode=138.68.75.8:18765" >> genix.conf_TEMP
-    echo "addnode=159.89.177.213:18765" >> genix.conf_TEMP
-
-    echo "" >>genix.conf_TEMP
-    echo "masternodeprivkey=$PRIVKEY" >> genix.conf_TEMP
+    echo "addnode=45.76.113.77:32538" >> genix.conf_TEMP
+    echo "masternodeblsprivkey=$PRIVKEY" >> genix.conf_TEMP
     sudo ufw allow $PORT/tcp
 
     mv genix.conf_TEMP $CONF_DIR/genix.conf
