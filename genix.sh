@@ -4,7 +4,7 @@ cd ~
 echo "****************************************************************************"
 echo "* Ubuntu 18.04 is the recommended operating system for this install.       *"
 echo "*                                                                          *"
-echo "* This script will install and configure your Pigeoncoin masternodes.           *"
+echo "* This script will install and configure your Genix masternodes.           *"
 echo "****************************************************************************"
 echo && echo && echo
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -21,13 +21,13 @@ if [[ $DOSETUP =~ "y" ]]; then
 
     cd
 
-    if [[ -d genix-fork/ ]]; then
+    if [[ -d genix/ ]]; then
     echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     echo "!                                                 !"
     echo "!    Detected previous build files, deleting..    !"
     echo "!                                                 !"
     echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-        rm -r genix-fork/
+        rm -r genix/
     fi 
 
     sudo apt-get -y update
@@ -54,15 +54,15 @@ if [[ $DOSETUP =~ "y" ]]; then
     cd
 
     cd 
-    git clone https://github.com/farsider350/genix-fork.git
-    cd genix-fork/
+    git clone https://github.com/twinky-kms/genix.git
+    cd genix/
     git checkout v2.2.1
     bash build.sh
     rm /usr/bin/genixd*
     mv src/genixd /usr/bin
     mv src/genix-cli /usr/bin
     mv src/genix-tx /usr/bin
-    #rm -r /root/genix-fork/
+    #rm -r /root/genix/
 
     sudo apt-get install -y ufw
     sudo ufw allow ssh/tcp
@@ -136,7 +136,7 @@ for i in $(seq 1 1 $MNCOUNT); do
     echo "bind=$IP" >> genix.conf_TEMP
     echo "logtimestamps=1" >> genix.conf_TEMP
     echo "maxconnections=64" >> genix.conf_TEMP
-    echo "addnode=45.76.113.77:32538" >> genix.conf_TEMP
+    echo "addnode=45.76.113.77:31345" >> genix.conf_TEMP
     echo "masternodeblsprivkey=$PRIVKEY" >> genix.conf_TEMP
     sudo ufw allow $PORT/tcp
 
