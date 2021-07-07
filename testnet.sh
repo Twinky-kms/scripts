@@ -20,29 +20,29 @@ mkdir .genixcore-2/
 mkdir .genixcore-3/
 
 ufw allow 22/tcp
-ufw allow 32358/tcp
-ufw allow 32359/tcp
-ufw allow 32560/tcp
+ufw allow 32538/tcp
+ufw allow 32539/tcp
+ufw allow 32540/tcp
 
 echo "#!/bin/bash" >~/master-cli.sh
 echo "./genix-cli-'$1'.sh $*"
 
 echo '#!/bin/bash' >~/genixd-1.sh
-echo "genixd -testnet -datadir=/root/.genixcore/ -conf=genix.conf -port=32358"'$*' >>~/genixd-1.sh
+echo "genixd -testnet -datadir=/root/.genixcore/ -conf=genix.conf -port=32538" '$*' >>~/genixd-1.sh
 echo '#!/bin/bash' >~/genix-cli-1.sh
 echo "genix-cli -testnet -datadir=/root/.genixcore/ -conf=genix.conf "'$*' >>~/genix-cli-1.sh
 echo '#!/bin/bash' >~/genix-tx-1.sh
 echo "genix-tx -datadir=/root/.genixcore/ -conf=genix.conf "'$*' >>~/genix-tx-1.sh
 
 echo '#!/bin/bash' >~/genixd-2.sh
-echo "genixd -testnet -datadir=/root/.genixcore-2/ -conf=genix.conf -port=32359 -rpcport=3333 "'$*' >>~/genixd-2.sh
+echo "genixd -testnet -datadir=/root/.genixcore-2/ -conf=genix.conf -port=32539 -rpcport=3333 "'$*' >>~/genixd-2.sh
 echo '#!/bin/bash' >~/genix-cli-2.sh
 echo "genix-cli -testnet -datadir=/root/.genixcore-2/ -conf=genix.conf -rpcport=3333 "'$*' >>~/genix-cli-2.sh
 echo '#!/bin/bash' >~/genix-tx-2.sh
 echo "genix-tx -datadir=/root/.genixcore-2/ -conf=genix.conf "'$*' >>~/genix-tx-2.sh
 
 echo '#!/bin/bash' >~/genixd-3.sh
-echo "genixd -testnet -datadir=/root/.genixcore-3/ -conf=genix.conf -port=32360 -rpcport=4444 "'$*' >>~/genixd-3.sh
+echo "genixd -testnet -datadir=/root/.genixcore-3/ -conf=genix.conf -port=32540 -rpcport=4444 "'$*' >>~/genixd-3.sh
 echo '#!/bin/bash' >~/genix-cli-3.sh
 echo "genix-cli -testnet -datadir=/root/.genixcore-3/ -conf=genix.conf -rpcport=4444 "'$*' >>~/genix-cli-3.sh
 echo '#!/bin/bash' >~/genix-tx-3.sh
@@ -65,7 +65,7 @@ echo "server=1" >> genix.conf_TEMP
 echo "daemon=1" >> genix.conf_TEMP
 echo "#----" >> genix.conf_TEMP
 echo "#masternodeblsprivkey=" >> genix.conf_TEMP
-echo "#externalip=XXX.XXX.XXX.XXX" >> genix.conf_TEMP
+echo "externalip=149.28.234.142" >> genix.conf_TEMP
 echo "#----" >> genix.conf_TEMP
 
 cp genix.conf_TEMP .genixcore/genix.conf
