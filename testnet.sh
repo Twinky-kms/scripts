@@ -7,7 +7,7 @@ apt install -y zip > /dev/null 2>&1
 wget https://github.com/Twinky-kms/genix/releases/download/v2.2.3-dev1/linux-binaries.zip > /dev/null 2>&1
 unzip linux-binaries.zip > /dev/null 2>&1
 
-sudo fallocate -l G /swapfile; ls -lh /swapfile; sudo chmod 600 /swapfile; ls -lh /swapfile; sudo mkswap /swapfile; sudo swapon /swapfile; sudo swapon --show; sudo cp /etc/fstab /etc/fstab.bak; echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+sudo fallocate -l 2G /swapfile; ls -lh /swapfile; sudo chmod 600 /swapfile; ls -lh /swapfile; sudo mkswap /swapfile; sudo swapon /swapfile; sudo swapon --show; sudo cp /etc/fstab /etc/fstab.bak; echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 cd linux-binaries/
 mv genixd /usr/bin/
