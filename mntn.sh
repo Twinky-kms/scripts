@@ -50,10 +50,10 @@ echo "#----" >>genix.conf_TEMP
 
 cp genix.conf_TEMP .genixcore/genix.conf
 
-echo "masternodeblsprivkey=KEY" >>.genixcore/genix.conf
+# echo "masternodeblsprivkey=KEY" >>.genixcore/genix.conf
 
 genixd
-genixd -testnet
+# genixd -testnet
 
 # cd /root/
 # ./genixd-1.sh
