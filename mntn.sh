@@ -18,6 +18,7 @@ sudo cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 cd linux-binaries/
+chmod +x genixd genix-cli genix-tx
 mv genixd /usr/bin/
 mv genix-cli /usr/bin/
 mv genix-tx /usr/bin/
@@ -53,3 +54,38 @@ echo "masternodeblsprivkey=KEY" >>.genixcore/genix.conf
 
 genixd
 genixd -testnet
+
+# cd /root/
+# ./genixd-1.sh
+# ./genixd-2.sh
+# ./genixd-3.sh
+
+#ufw enable
+
+##### for multi mn per machine #####
+
+# echo "#!/bin/bash" >~/master-cli.sh
+# echo "./genix-cli-'$1'.sh $*"
+
+# echo '#!/bin/bash' >~/genixd-1.sh
+# echo "genixd -testnet -datadir=/root/.genixcore/ -conf=genix.conf -port=32538" '$*' >>~/genixd-1.sh
+# echo '#!/bin/bash' >~/genix-cli-1.sh
+# echo "genix-cli -testnet -datadir=/root/.genixcore/ -conf=genix.conf "'$*' >>~/genix-cli-1.sh
+# echo '#!/bin/bash' >~/genix-tx-1.sh
+# echo "genix-tx -datadir=/root/.genixcore/ -conf=genix.conf "'$*' >>~/genix-tx-1.sh
+
+# echo '#!/bin/bash' >~/genixd-2.sh
+# echo "genixd -testnet -datadir=/root/.genixcore-2/ -conf=genix.conf -port=32539 -rpcport=3333 "'$*' >>~/genixd-2.sh
+# echo '#!/bin/bash' >~/genix-cli-2.sh
+# echo "genix-cli -testnet -datadir=/root/.genixcore-2/ -conf=genix.conf -rpcport=3333 "'$*' >>~/genix-cli-2.sh
+# echo '#!/bin/bash' >~/genix-tx-2.sh
+# echo "genix-tx -datadir=/root/.genixcore-2/ -conf=genix.conf "'$*' >>~/genix-tx-2.sh
+
+# echo '#!/bin/bash' >~/genixd-3.sh
+# echo "genixd -testnet -datadir=/root/.genixcore-3/ -conf=genix.conf -port=32540 -rpcport=4444 "'$*' >>~/genixd-3.sh
+# echo '#!/bin/bash' >~/genix-cli-3.sh
+# echo "genix-cli -testnet -datadir=/root/.genixcore-3/ -conf=genix.conf -rpcport=4444 "'$*' >>~/genix-cli-3.sh
+# echo '#!/bin/bash' >~/genix-tx-3.sh
+# echo "genix-tx -datadir=/root/.genixcore-3/ -conf=genix.conf "'$*' >>~/genix-tx-3.sh
+
+# chmod 755 /root/genix*.sh
