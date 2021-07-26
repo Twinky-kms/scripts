@@ -17,6 +17,7 @@ sudo swapon --show
 sudo cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
+cd linux-binaries/
 chmod +x genixd genix-cli genix-tx
 mv genixd /usr/bin/
 mv genix-cli /usr/bin/
@@ -52,7 +53,7 @@ cp genix.conf_TEMP .genixcore/genix.conf
 # echo "masternodeblsprivkey=KEY" >>.genixcore/genix.conf
 
 genixd
-# genixd -testnet
+genixd -testnet
 
 # cd /root/
 # ./genixd-1.sh
