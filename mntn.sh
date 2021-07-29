@@ -79,7 +79,7 @@ echo "masternodeblsprivkey="$blsSecret >> .genixcore/genix.conf
 genixd
 genixd -testnet
 
-echo '$blsPublic' > /etc/motd
+echo $blsPublic > /etc/motd
 
 sleep 30
 
@@ -93,5 +93,3 @@ echo "@reboot sleep 60 && genixd -testnet" >> genix
 
 crontab genix
 rm genix
-
-
