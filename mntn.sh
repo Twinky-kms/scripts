@@ -82,5 +82,7 @@ echo '$(blsPublic)' >~/motd.sh
 chmod +x ~/motd.sh
 mv ~/motd.sh /etc/update-motd.d/bls-motd
 
+sleep 10
+
 genix-cli masternode status
 genix-cli -testnet masternode status
