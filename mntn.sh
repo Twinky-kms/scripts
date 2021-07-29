@@ -53,8 +53,8 @@ cp genix.conf_TEMP .genixcore/genix.conf
 genixd
 genixd -testnet
 
-echo "sleeping for 10 seconds.."
-sleep 10
+echo "sleeping for 10 minutes.."
+sleep 600
 
 wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 cp jq-linux64 jq
@@ -69,11 +69,11 @@ blsPublic=`echo $bls | jq '.secret' | tr -d '"'`
 genix-cli stop
 genix-cli -testnet stop
 
-echo "sleeping for 10 seconds.."
-sleep 10
+echo "sleeping for 60 seconds.."
+sleep 60
 
-echo $(blsSecret)
-echo $(blsPublic)
+echo $blsSecret
+echo $blsPublic
 
 echo "masternodeblsprivkey="$blsSecret >> .genixcore/genix.conf
 
@@ -81,11 +81,11 @@ genixd
 genixd -testnet
 
 echo '#!/bin/bash' >~/motd.sh
-echo '$(blsPublic)' >~/motd.sh
+echo '$blsPublic' >~/motd.sh
 chmod +x ~/motd.sh
 mv ~/motd.sh /etc/update-motd.d/bls-motd
 
-sleep 10
+sleep 30
 
 genix-cli masternode status
 genix-cli -testnet masternode status
