@@ -79,10 +79,7 @@ echo "masternodeblsprivkey="$blsSecret >> .genixcore/genix.conf
 genixd
 genixd -testnet
 
-echo '#!/bin/bash' >~/motd.sh
-echo '$blsPublic' >~/motd.sh
-chmod +x ~/motd.sh
-mv ~/motd.sh /etc/update-motd.d/bls-motd
+echo '$blsPublic' > /etc/motd
 
 sleep 30
 
