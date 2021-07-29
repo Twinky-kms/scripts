@@ -88,3 +88,13 @@ sleep 30
 
 genix-cli masternode status
 genix-cli -testnet masternode status
+
+crontab -l > genix
+
+echo "@reboot sleep 60 && genixd" >> genix
+echo "@reboot sleep 60 && genixd -testnet" >> genix
+
+crontab genix
+rm genix
+
+
