@@ -50,7 +50,26 @@ echo "#----" >>genix.conf_TEMP
 
 cp genix.conf_TEMP .genixcore/genix.conf
 
-# echo "masternodeblsprivkey=KEY" >>.genixcore/genix.conf
+genixd
+genixd -testnet
+
+bls=$(genix-cli bls generate)
+
+blsSecret=`echo $bls | jq '.public'| tr -d '"'`
+blsPublic=`echo $bls | jq '.secret' | tr -d '"'`
+
+genix-cli stop
+genix-cli -testnet stop
+
+echo "masternodeblsprivkey=$(blsSecret)" >> .genixcore/genix.conf
 
 genixd
 genixd -testnet
+
+echo '#!/bin/bash' >~/motd.sh
+echo '$(blsPublic)' >~/motd.sh
+chmod +x ~/motd.sh
+mv ~/motd.sh /etc/update-motd.d/bls-motd
+
+genix-cli masternode status
+genix-cli -testnet masternode status
