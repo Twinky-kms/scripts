@@ -72,6 +72,9 @@ genix-cli -testnet stop
 echo "sleeping for 10 seconds.."
 sleep 10
 
+echo $(blsSecret)
+echo $(blsPublic)
+
 echo "masternodeblsprivkey="$blsSecret >> .genixcore/genix.conf
 
 genixd
