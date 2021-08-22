@@ -10,7 +10,7 @@ rm linux-binaries.zip
 wget https://github.com/Twinky-kms/genix/releases/download/v2.2.3-dev1/linux-binaries.zip 
 unzip linux-binaries.zip 
 
-sleep 10
+sleep 30
 
 chmod +x genixd genix-cli genix-tx
 mv genixd /usr/bin
