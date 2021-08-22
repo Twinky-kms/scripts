@@ -5,7 +5,7 @@ import time
 
 rpc_user = ''
 rpc_password = ''
-rpc_url = ''
+rpc_url = 'http://127.0.0.1:YOURRPCPORT'
 
 collat_address_label = 'mn-batch1-c'
 owner_address_label = 'mn-batch1-o'
@@ -38,14 +38,14 @@ while i < amountToCreate+1:
     com = ","
 
     # Get new address
-    cAddress = instruct_wallet('getnewaddress', ['mn-batch-2-c'+str(i)])
+    cAddress = instruct_wallet('getnewaddress', [collat_address_label+"-"+str(i)])
     if cAddress['error'] != None:
         print(cAddress['error'])
     else:
         collatAddress += cAddress['result']
 
     # Get new address
-    oAddress = instruct_wallet('getnewaddress', ['mn-batch-2-o-'+ str(i)])
+    oAddress = instruct_wallet('getnewaddress', [owner_address_label+"-"+ str(i)])
     if oAddress['error'] != None:
         print(oAddress['error'])
     else:
