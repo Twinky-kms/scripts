@@ -60,7 +60,7 @@ cp jq-linux64 jq
 chmod +x jq
 mv jq /usr/bin/
 
-bls=$(genix-cli -testnet bls generate)
+bls=$(pigeon-cli -testnet bls generate)
 
 blsSecret=`echo $bls | jq '.secret'| tr -d '"'`
 blsPublic=`echo $bls | jq '.public' | tr -d '"'`
