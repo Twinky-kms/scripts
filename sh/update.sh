@@ -6,7 +6,7 @@ genix-cli stop
 genix-cli -testnet stop
 
 rm linux-binaries.zip
-rm genix-qt
+rm /root/genix-qt
 
 wget https://github.com/Twinky-kms/genix/releases/download/v2.2.3-dev1/linux-binaries.zip 
 unzip linux-binaries.zip 
