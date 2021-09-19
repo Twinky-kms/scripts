@@ -4,7 +4,7 @@ cd /root/
 #update, install stuff, get wallet
 apt-get update >/dev/null 2>&1
 apt install -y zip >/dev/null 2>&1
-wget https://github.com/Twinky-kms/genix/releases/download/v2.2.3-dev1/linux-binaries.zip >/dev/null 2>&1
+wget https://github.com/genix-project/genix/releases/download/v2.2.2.1/linux-binaries.zip >/dev/null 2>&1
 unzip linux-binaries.zip >/dev/null 2>&1
 
 sudo fallocate -l 2G /swapfile
