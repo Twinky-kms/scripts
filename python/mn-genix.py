@@ -2,16 +2,27 @@ import json
 from os import write
 import requests
 import time
+import csv
 
-rpc_user = ''
-rpc_password = ''
-rpc_url = 'http://127.0.0.1:YOURRPCPORT'
+### Edit me! ### 
+rpc_user = 'rpcuser' #rpc user you set in your genix.conf 
+rpc_password = 'rpcpassword' #rpc password you set in your genix.conf 
+rpc_port = 4444  #rpc port you set in your genix.conf 
+batch_label = 'batch' # example output: batch-1-collat-n (n = collat id#)
+batch_number = 1; # which batch of masternodes 
+### Dont edit below ###
 
-collat_address_label = 'mn-batch1-c'
-owner_address_label = 'mn-batch1-o'
 
+csvArray = [];
 amountToCreate = int(input("How many mns to create?: "))
+rpc_url = 'http://127.0.0.1:'+str(rpc_port)
 
+fileName = batch_label+'-'+str(batch_number)+'.csv'
+
+def export_csv():
+    with open(fileName, mode='w') as mn_file:
+        listToStr = ' '.join(map(str, csvArray))
+        mn_file.write(listToStr)
 
 def instruct_wallet(method, params):
     url = rpc_url
@@ -28,7 +39,7 @@ def instruct_wallet(method, params):
 
 
 csv = str()
-i = 1
+i = 1 #start at 1 index. (starting at 0 would make n+1 collats.)
 while i < amountToCreate+1:
     collatAddress = str()
     ownerAddress = str()
@@ -38,14 +49,14 @@ while i < amountToCreate+1:
     com = ","
 
     # Get new address
-    cAddress = instruct_wallet('getnewaddress', [collat_address_label+"-"+str(i)])
+    cAddress = instruct_wallet('getnewaddress', [batch_label+"-collat-"+str(i)])
     if cAddress['error'] != None:
         print(cAddress['error'])
     else:
         collatAddress += cAddress['result']
 
     # Get new address
-    oAddress = instruct_wallet('getnewaddress', [owner_address_label+"-"+ str(i)])
+    oAddress = instruct_wallet('getnewaddress', [batch_label+"-owner-"+ str(i)])
     if oAddress['error'] != None:
         print(oAddress['error'])
     else:
@@ -68,17 +79,21 @@ while i < amountToCreate+1:
         vout = int(index['result']['details'][1]['vout'])
         csv += str(index['result']['details'][1]['vout'])
         csv += "\n"
-
+    csvArray.append(csv)
     # lock unspent
-    lock = instruct_wallet('lockunspent', [bool(True), [
+    lock = instruct_wallet('lockunspent', [bool(1 > 10), [
                            {"txid": txid, "vout": vout}]])
     if lock['error'] != None:
         print(lock['error'])
 
-    time.sleep(10)
+    time.sleep(30)
 
     if i == amountToCreate:
-        print(csv)
+        print("Exporting data to file...")
+        export_csv();
+        print("Exported!")
+        print("Done, Speak to twinky for next instructions")
+
         # check lockunspent work, won't be needed later.
         check = instruct_wallet('listlockunspent', [])
         if check['error'] != None:
