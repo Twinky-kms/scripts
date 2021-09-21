@@ -38,16 +38,16 @@ def instruct_wallet(method, params):
         print('No response from Wallet, check Bitcoin is running on this machine')
 
 
-csv = str()
 i = 1 #start at 1 index. (starting at 0 would make n+1 collats.)
-while i < amountToCreate+1:
+while i < amountToCreate:
     collatAddress = str()
     ownerAddress = str()
     txid = str()
     vout = int()
     txIndex = int()
     com = ","
-
+    csv = str()
+    
     # Get new address
     cAddress = instruct_wallet('getnewaddress', [batch_label+"-collat-"+str(i)])
     if cAddress['error'] != None:
