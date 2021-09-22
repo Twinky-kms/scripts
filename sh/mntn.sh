@@ -28,7 +28,6 @@ mkdir .genixcore/
 
 ufw allow 22/tcp
 ufw allow 43649/tcp
-#testnet
 ufw allow 32538/tcp
 echo "y" | sudo ufw enable
 
@@ -51,7 +50,7 @@ echo "#----" >>genix.conf_TEMP
 cp genix.conf_TEMP .genixcore/genix.conf
 
 # genixd
-genixd -testnet
+genixd
 
 sleep 60
 
@@ -60,13 +59,13 @@ cp jq-linux64 jq
 chmod +x jq
 mv jq /usr/bin/
 
-bls=$(genix-cli -testnet bls generate)
+bls=$(genix-cli bls generate)
 
 blsSecret=`echo $bls | jq '.secret'| tr -d '"'`
 blsPublic=`echo $bls | jq '.public' | tr -d '"'`
 
 # genix-cli stop
-genix-cli -testnet stop
+genix-cli stop
 
 echo "sleeping for 60 seconds.."
 sleep 60
@@ -77,19 +76,18 @@ echo $blsPublic
 echo "masternodeblsprivkey="$blsSecret >> .genixcore/genix.conf
 
 # genixd
-genixd -testnet
+genixd
 
 echo $blsPublic > /etc/motd
 
 sleep 30
 
 # genix-cli masternode status
-genix-cli -testnet masternode status
+genix-cli masternode status
 
 crontab -l > genix
 
-# echo "@reboot sleep 60 && genixd" >> genix
-echo "@reboot sleep 60 && genixd -testnet" >> genix
+echo "@reboot sleep 60 && genixd" >> genix
 
 crontab genix
 rm genix
