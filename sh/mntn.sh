@@ -72,6 +72,7 @@ sleep 60
 
 echo $blsSecret
 echo $blsPublic
+hostname -I
 
 echo "masternodeblsprivkey="$blsSecret >> .genixcore/genix.conf
 
