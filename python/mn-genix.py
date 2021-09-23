@@ -39,7 +39,7 @@ def instruct_wallet(method, params):
 
 
 i = 1 #start at 1 index. (starting at 0 would make n+1 collats.)
-while i < amountToCreate:
+while i < amountToCreate+1:
     collatAddress = str()
     ownerAddress = str()
     txid = str()
