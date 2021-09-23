@@ -2,10 +2,10 @@
 cd /root/
 
 #update, install stuff, get wallet
-apt-get update >/dev/null 2>&1
-apt install -y zip >/dev/null 2>&1
-wget https://github.com/genix-project/genix/releases/download/v2.2.2.1/linux-binaries.zip >/dev/null 2>&1
-unzip linux-binaries.zip >/dev/null 2>&1
+apt-get update
+apt install -y zip
+wget https://github.com/genix-project/genix/releases/download/v2.2.2.1/linux-binaries.zip
+unzip linux-binaries.zip
 
 sudo fallocate -l 2G /swapfile
 ls -lh /swapfile
@@ -17,7 +17,7 @@ sudo swapon --show
 sudo cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
-cd linux-binaries/
+cd
 chmod +x genixd genix-cli genix-tx
 mv genixd /usr/bin/
 mv genix-cli /usr/bin/
