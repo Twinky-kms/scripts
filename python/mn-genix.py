@@ -8,10 +8,10 @@ import csv
 rpc_user = 'rpcuser' #rpc user you set in your genix.conf 
 rpc_password = 'rpcpassword' #rpc password you set in your genix.conf 
 rpc_port = 4444  #rpc port you set in your genix.conf 
-batch_label = 'b2' # example output: batch-1-collat-n (n = collat id#)
+batch_label = 'b2-fixed' # example output: batch-1-collat-n (n = collat id#)
 ### Dont edit below ###
 
-fileName = batch_label+'-'+'.csv'
+fileName = batch_label+'.csv'
 rpc_url = 'http://127.0.0.1:'+str(rpc_port)
 
 def export_csv():
@@ -79,7 +79,7 @@ while i < amountToCreate+1:
         csvStr += oAddress['result']+com
 
     # Send collat
-    collat = instruct_wallet('sendtoaddress', [collatAddress, "10"])
+    collat = instruct_wallet('sendtoaddress', [collatAddress, "100000"])
     if collat['error'] != None:
         print(collat['error'])
     else:
