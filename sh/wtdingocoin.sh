@@ -16,6 +16,8 @@ unzip linux-binaries.zip
 rm dingocoin-tx
 chmod +x dingo*
 cp dingocoin* /usr/bin/
+cd $HOME
+mkdir .dingocoin
 cd $HOME/.dingocoin/
 
 cat > dingocoin.conf <<EOF
