@@ -16,6 +16,7 @@ unzip linux-binaries.zip
 rm dingocoin-tx
 chmod +x dingo*
 cp dingocoin* /usr/bin/
+cd $HOME/.dingocoin/
 
 cat > dingocoin.conf <<EOF
 
@@ -28,7 +29,6 @@ rpcport=34646
 EOF
 
 dingocoind -testnet -daemon
-cd $HOME/.dingocoin/
 sleep 5
 CHANGE_ADDRESS=$(dingocoin-cli -testnet getnewaddress)
 CHANGE_ADDRESS_VALIDATE=$(dingocoin-cli -testnet validateaddress $CHANGE_ADDRESS)
